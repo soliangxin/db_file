@@ -21,7 +21,7 @@ func (p *PidFile) getFileOwner(lock lockfile.Lockfile) *os.Process {
 	return owner
 }
 
-// 锁定进程Pid文件
+// Lockfile 锁定进程Pid文件
 func (p *PidFile) Lockfile() {
 	// 初始化, 获取Pid文件
 	var err error
@@ -71,18 +71,18 @@ var (
 	pidfile          *string
 )
 
-// 设置Pid文件
+// SetPidFile 设置Pid文件
 func SetPidFile(p string) {
 	pidfile = &p
 	isPid = true
 }
 
-// 返回是否已设置Pid文件
+// IsConfiguredPidFile 返回是否已设置Pid文件
 func IsConfiguredPidFile() bool {
 	return isPid
 }
 
-// 删除Pid文件
+// RemovePidFile 删除Pid文件
 func RemovePidFile() error {
 	log.Debugf("remove pid file %s", *pidfile)
 	if *pidfile == "" {

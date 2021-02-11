@@ -13,7 +13,7 @@ import (
 	"strings"
 )
 
-// 设置日志级别
+// SetLogLevel 设置日志级别
 func SetLogLevel(level string) error {
 	switch strings.ToLower(level) {
 	case "trace":
@@ -37,7 +37,7 @@ func SetLogLevel(level string) error {
 	return nil
 }
 
-// 从文件中获取查询SQL
+// ReadSQLFile 从文件中获取查询SQL
 func ReadSQLFile(fileName string) string {
 	// 打开SQL文件
 	log.Infof("get the query SQL from the file %s", fileName)
@@ -105,7 +105,7 @@ func exportToFile(args *Arguments) error {
 	return nil
 }
 
-// 接收命令行参数后, 处理参数
+// Run 接收命令行参数后, 处理参数
 func Run(args *Arguments) {
 	// 设置日志格式
 	if err := SetLogLevel(args.LogLevel); err != nil {

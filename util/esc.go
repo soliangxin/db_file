@@ -2,7 +2,7 @@ package util
 
 import "strings"
 
-// 命令行特殊字符进行转义
+// EscapeCode 命令行特殊字符进行转义
 func EscapeCode(str string) string {
 	str = strings.Replace(str, "\\r", "\r", -1)      // Mac OS
 	str = strings.Replace(str, "\\t", "\t", -1)      // 跳格

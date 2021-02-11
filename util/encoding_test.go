@@ -63,7 +63,7 @@ func TestEncoding_Init(t *testing.T) {
 				converter:      tt.fields.converter,
 			}
 			if err := e.Init(tt.args.fromEncoding, tt.args.toEncoding, tt.args.encodingErrors); (err != nil) != tt.wantErr {
-				t.Errorf("Encoding.Init() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("Encoding.NewDupKeyHash() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}

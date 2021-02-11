@@ -19,7 +19,7 @@ type Write interface {
 	Close() error                      // 关闭文件
 }
 
-// 打开压缩文件Write
+// NewWrite 打开压缩文件Write
 // 文件名称、模式、权限、压缩类型
 func NewWrite(w io.Writer, compressType string) (Write, error) {
 	var (
@@ -57,14 +57,14 @@ func NewWrite(w io.Writer, compressType string) (Write, error) {
 	return wd, nil
 }
 
-// 写入输出文件内容
+// File 写入输出文件内容
 type File struct {
 	fileName string   // 文件名
 	file     *os.File // 保存打开的文件对象
 	write    Write    // 写入文件对象
 }
 
-// 打开输出文件
+// OpenFile 打开输出文件
 // 参数：输出文件名, 文件压缩格式, 文件存在是否覆盖
 // 返回: *File, error
 func OpenFile(fileName, compressFormat string, overwriteFile bool) (*File, error) {
@@ -110,7 +110,7 @@ func (f *File) Write(b []byte) (int, error) {
 	return n, nil
 }
 
-// 写入数据
+// WriteString 写入数据
 func (f *File) WriteString(s string) (int, error) {
 	n, err := f.write.WriteString(s)
 	if err != nil {
@@ -120,13 +120,12 @@ func (f *File) WriteString(s string) (int, error) {
 	return n, nil
 }
 
-
-// 刷新数据到磁盘
+// Flash 刷新数据到磁盘
 func (f *File) Flash() error {
 	return f.write.Flush()
 }
 
-// 关闭文件
+// Close 关闭文件
 func (f *File) Close() error {
 	// 关闭写入压缩流
 	log.Debugf("close compressed flow")

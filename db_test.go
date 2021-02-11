@@ -65,7 +65,7 @@ func TestDB_Init(t *testing.T) {
 			}
 			// 初始化
 			if err := d.Init(d.args); (err != nil) != tt.wantErr {
-				t.Errorf("DB.Init() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("DB.NewDupKeyHash() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}
@@ -154,7 +154,7 @@ func TestDB(t *testing.T) {
 			}
 			// 初始化
 			if err := d.Init(d.args); (err != nil) != tt.wantErr {
-				t.Errorf("DB.Init() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("DB.NewDupKeyHash() error = %v, wantErr %v", err, tt.wantErr)
 			}
 			if err := d.Connect(); (err != nil) != tt.wantErr {
 				t.Errorf("DB.Connect() error = %v, wantErr %v", err, tt.wantErr)

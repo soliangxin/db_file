@@ -9,9 +9,9 @@ import (
 )
 
 // 程序版本
-const appVersion = "1.0.0"
+const appVersion = "1.1.0"
 
-//命令行提示用法
+// Usage 命令行提示用法
 const Usage = `NAME:
    {{.Name}}
 
@@ -82,7 +82,7 @@ func main() {
 
 			// 从文件中获取SQL
 			&cli.StringFlag{
-				Name:        "sql-file",
+				Name:        "sql_file",
 				Aliases:     []string{"f"},
 				Usage:       "get the sql from the file",
 				Required:    false,
@@ -104,7 +104,7 @@ func main() {
 				Aliases:     []string{"s"},
 				Usage:       "output file separator",
 				Required:    false,
-				DefaultText: ";",
+				Value:       ";",
 				Destination: &args.Separator,
 			},
 
@@ -114,7 +114,7 @@ func main() {
 				Aliases:     []string{"n"},
 				Usage:       "output file newline character",
 				Required:    false,
-				DefaultText: `\n`,
+				Value:       "\n",
 				Destination: &args.Newline,
 			},
 
@@ -138,7 +138,7 @@ func main() {
 
 			// 输入字符集编码
 			&cli.StringFlag{
-				Name:        "from-encoding",
+				Name:        "from_encoding",
 				Usage:       "input character set encoding",
 				Required:    false,
 				Destination: &args.FromEncoding,
@@ -146,7 +146,7 @@ func main() {
 
 			// 输出字符集编码
 			&cli.StringFlag{
-				Name:        "to-encoding",
+				Name:        "to_encoding",
 				Usage:       "output character set encoding",
 				Required:    false,
 				Destination: &args.ToEncoding,
@@ -154,10 +154,10 @@ func main() {
 
 			// 字符串编码错误时处理
 			&cli.StringFlag{
-				Name:        "encoding-error",
+				Name:        "encoding_error",
 				Usage:       "conversion coding error, valid values (strict, ignore, skip)",
 				Required:    false,
-				DefaultText: "strict",
+				Value:       "strict",
 				Destination: &args.EncodingError,
 			},
 
@@ -167,12 +167,13 @@ func main() {
 				Aliases:     []string{"t"},
 				Usage:       "add a tag to the output field",
 				Required:    false,
+				Value:       "\"",
 				Destination: &args.Tag,
 			},
 
 			// 字段是否都加标签Tag
 			&cli.BoolFlag{
-				Name:        "tag-all",
+				Name:        "tag_all",
 				Usage:       "all fields are added with tags, and the default non-numeric type is added",
 				Value:       false,
 				Destination: &args.TagAll,
@@ -180,15 +181,15 @@ func main() {
 
 			// 添加Tag排除的字段类型
 			&cli.StringFlag{
-				Name:        "tag-exclude",
+				Name:        "tag_exclude",
 				Usage:       `The database type excluded when adding the tag, with multiple types separated by ","`,
-				DefaultText: "INT,BIGINT",
+				Value:       "INT,BIGINT",
 				Destination: &args.TagExcludeFieldType,
 			},
 
 			// 输出文件写入列名
 			&cli.BoolFlag{
-				Name:        "column-name",
+				Name:        "column_name",
 				Usage:       "output file writes column names",
 				Required:    false,
 				Value:       false,
@@ -197,7 +198,7 @@ func main() {
 
 			// 输出文件压缩
 			&cli.StringFlag{
-				Name:        "compress-format",
+				Name:        "compress_format",
 				Usage:       "output file compression, valid values (gzip, lz4, snappy, zstd)",
 				Required:    false,
 				Destination: &args.CompressFormat,
@@ -205,7 +206,7 @@ func main() {
 
 			// 最大缓存记录条数
 			&cli.Int64Flag{
-				Name:        "cache-num",
+				Name:        "cache_num",
 				Usage:       "the maximum number of records to write to the cache",
 				Required:    false,
 				Value:       1000,
@@ -214,10 +215,9 @@ func main() {
 
 			// 字段为空时填写的默认值
 			&cli.StringFlag{
-				Name:        "empty-val",
+				Name:        "empty_val",
 				Usage:       "the value filled in when the field value is NULL",
 				Required:    false,
-				DefaultText: "",
 				Destination: &args.EmptyVal,
 			},
 
@@ -227,19 +227,20 @@ func main() {
 				Aliases:     []string{"l"},
 				Usage:       "current console log level, valid values (trace, debug, info, warn, error, fatal, panic)",
 				Required:    false,
-				DefaultText: "info",
-				Destination: &args.EmptyVal,
+				Value:       "info",
+				Destination: &args.LogLevel,
 			},
 		},
 
 		// 验证命令行参数
 		Action: func(c *cli.Context) error {
 			// 没有收到命令行参数, 打印帮助信息并退出
-			if c.NArg() <= 0 {
+			if c.NumFlags() < 1 {
 				cli.ShowAppHelpAndExit(c, 0)
 			}
 
-			// 验证其他参数
+			// 运行命令, 导出数据
+			db_file.Run(args)
 
 			return nil
 		},

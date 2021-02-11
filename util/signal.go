@@ -28,7 +28,7 @@ func init() {
 	SignalMap["terminated"] = 15
 }
 
-// 监听并处理Linux系统信号
+// ListenSignal 监听并处理Linux系统信号
 func ListenSignal() {
 	log.Info("receive and process signals...")
 	//创建监听退出chan

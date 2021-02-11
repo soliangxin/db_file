@@ -6,7 +6,7 @@ import (
 	"github.com/asaskevich/govalidator"
 )
 
-// 需要的参数
+// Arguments 需要的参数
 type Arguments struct {
 	Url                 string // 连接数据库URL, 需要符合URL格式
 	QuerySql            string // 查询SQL
@@ -30,7 +30,7 @@ type Arguments struct {
 	ExecSql             string // 最终执行的SQL
 }
 
-// 验证接收的参数是否正确
+// Validation 验证接收的参数是否正确
 func (a Arguments) Validation() error {
 	// URL 未设置
 	if a.Url == "" {

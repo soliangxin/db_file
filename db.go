@@ -20,7 +20,7 @@ import (
 	"strings"
 )
 
-// 数据库操作
+// DB 数据库操作
 type DB struct {
 	args                 *Arguments     // 命令行参数
 	conn                 *sql.DB        // 数据库操作对象
@@ -42,7 +42,7 @@ type DB struct {
 	sTagExcludeFieldType []string       // 排除的字段类型数组
 }
 
-// 执行数据库操作初始化
+// Init 执行数据库操作初始化
 func (d *DB) Init(args *Arguments) error {
 	d.args = args // 保存参数
 	// 遍历接收到添加标签排除的字段类型, 拆分为数组
@@ -65,7 +65,7 @@ func (d *DB) Init(args *Arguments) error {
 	return nil
 }
 
-// 连接数据库
+// Connect 连接数据库
 func (d *DB) Connect() (err error) {
 	log.Infof("connection database, url: %s", d.args.Url)
 
@@ -187,7 +187,7 @@ func (d *DB) whetherAddTag(s string) bool {
 	return true
 }
 
-// 执行查询
+// WriteFile 执行查询
 func (d *DB) WriteFile() error {
 	log.Infof("execution query: %s", d.args.ExecSql)
 	// 执行语句

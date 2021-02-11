@@ -1,6 +1,6 @@
 module github.com/soliangxin/db_file
 
-go 1.14
+go 1.15
 
 require (
 	github.com/ClickHouse/clickhouse-go v1.4.3

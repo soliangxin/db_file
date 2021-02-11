@@ -8,14 +8,14 @@ import (
 	"strings"
 )
 
-// 字符集转换对象
+// Encoding 字符集转换对象
 type Encoding struct {
 	isConverter    bool             // 转换字符集
 	encodingErrors string           // 异常时处理
 	converter      *iconv.Converter // 字符串转换对象
 }
 
-// 初始化字符转换对象
+// Init 初始化字符转换对象
 func (e *Encoding) Init(fromEncoding, toEncoding, encodingErrors string) (err error) {
 	// 字符串编码转换
 	if fromEncoding != "" && toEncoding != "" {
@@ -37,7 +37,7 @@ func (e *Encoding) Init(fromEncoding, toEncoding, encodingErrors string) (err er
 	return nil
 }
 
-// 字符串编码转换-字符串
+// ConvertEncodingString 字符串编码转换-字符串
 //  return
 // 1 未进行字符编码转换
 // 2 字符编码转换成功
@@ -76,7 +76,7 @@ func (e *Encoding) ConvertEncodingString(str string) (string, int) {
 	return str, 1
 }
 
-// 字符串编码转换
+// ConvertEncoding 字符串编码转换
 func (e *Encoding) ConvertEncoding(b []byte) []byte {
 	if e.isConverter == true {
 		//logs.L.Trace("Convert character encoding records: %s", string(b))
@@ -110,7 +110,7 @@ func (e *Encoding) ConvertEncoding(b []byte) []byte {
 	return b
 }
 
-// 关闭文件对象
+// Close 关闭文件对象
 func (e *Encoding) Close() (err error) {
 	log.Info("close character encoding object")
 	return e.converter.Close()
