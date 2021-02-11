@@ -352,7 +352,7 @@ func (d *DB) GetColumnsType() []string {
 	return d.databaseTypeName
 }
 
-// 关闭数据库连接
+// Close 关闭数据库连接
 func (d *DB) Close() error {
 	log.Debug("close database connection")
 	if err := d.conn.Close(); err != nil {
