@@ -342,12 +342,12 @@ func (d *DB) encodingConversion(data string) (int, string) {
 	return 0, ""
 }
 
-// 获取列名称
+// GetColumnsName 获取列名称
 func (d *DB) GetColumnsName() []string {
 	return d.columns
 }
 
-// 获取列数据类型
+// GetColumnsType 获取列数据类型
 func (d *DB) GetColumnsType() []string {
 	return d.databaseTypeName
 }
