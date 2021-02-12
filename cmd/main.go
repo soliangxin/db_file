@@ -9,7 +9,7 @@ import (
 )
 
 // 程序版本
-const appVersion = "1.1.0"
+const appVersion = "1.2.0"
 
 // Usage 命令行提示用法
 const Usage = `NAME:
@@ -82,7 +82,7 @@ func main() {
 
 			// 从文件中获取SQL
 			&cli.StringFlag{
-				Name:        "sql_file",
+				Name:        "sql-file",
 				Aliases:     []string{"f"},
 				Usage:       "get the sql from the file",
 				Required:    false,
@@ -138,7 +138,7 @@ func main() {
 
 			// 输入字符集编码
 			&cli.StringFlag{
-				Name:        "from_encoding",
+				Name:        "from-encoding",
 				Usage:       "input character set encoding",
 				Required:    false,
 				Destination: &args.FromEncoding,
@@ -146,7 +146,7 @@ func main() {
 
 			// 输出字符集编码
 			&cli.StringFlag{
-				Name:        "to_encoding",
+				Name:        "to-encoding",
 				Usage:       "output character set encoding",
 				Required:    false,
 				Destination: &args.ToEncoding,
@@ -154,7 +154,7 @@ func main() {
 
 			// 字符串编码错误时处理
 			&cli.StringFlag{
-				Name:        "encoding_error",
+				Name:        "encoding-error",
 				Usage:       "conversion coding error, valid values (strict, ignore, skip)",
 				Required:    false,
 				Value:       "strict",
@@ -173,7 +173,7 @@ func main() {
 
 			// 字段是否都加标签Tag
 			&cli.BoolFlag{
-				Name:        "tag_all",
+				Name:        "tag-all",
 				Usage:       "all fields are added with tags, and the default non-numeric type is added",
 				Value:       false,
 				Destination: &args.TagAll,
@@ -181,7 +181,7 @@ func main() {
 
 			// 添加Tag排除的字段类型
 			&cli.StringFlag{
-				Name:        "tag_exclude",
+				Name:        "tag-exclude",
 				Usage:       `The database type excluded when adding the tag, with multiple types separated by ","`,
 				Value:       "INT,BIGINT",
 				Destination: &args.TagExcludeFieldType,
@@ -189,7 +189,7 @@ func main() {
 
 			// 输出文件写入列名
 			&cli.BoolFlag{
-				Name:        "column_name",
+				Name:        "column-name",
 				Usage:       "output file writes column names",
 				Required:    false,
 				Value:       false,
@@ -198,7 +198,7 @@ func main() {
 
 			// 输出文件压缩
 			&cli.StringFlag{
-				Name:        "compress_format",
+				Name:        "compress-format",
 				Usage:       "output file compression, valid values (gzip, lz4, snappy, zstd)",
 				Required:    false,
 				Destination: &args.CompressFormat,
@@ -206,7 +206,7 @@ func main() {
 
 			// 最大缓存记录条数
 			&cli.Int64Flag{
-				Name:        "cache_num",
+				Name:        "cache-num",
 				Usage:       "the maximum number of records to write to the cache",
 				Required:    false,
 				Value:       1000,
@@ -215,7 +215,7 @@ func main() {
 
 			// 字段为空时填写的默认值
 			&cli.StringFlag{
-				Name:        "empty_val",
+				Name:        "empty-val",
 				Usage:       "the value filled in when the field value is NULL",
 				Required:    false,
 				Destination: &args.EmptyVal,
